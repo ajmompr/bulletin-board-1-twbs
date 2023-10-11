@@ -24,7 +24,7 @@
       </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="addBoard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="addBoard" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -40,7 +40,7 @@
                   <input type="text" id="name_box" name="query_name" class="form-control">
                 </div>
                 <div class="d-grid">
-                  <button type="button" class="btn btn-success">Add board </button> 
+                  <button class="btn btn-success">Add board </button>
                 </div>
               </form>
             </div>
@@ -52,3 +52,12 @@
       </div>
     </div>
   </div>
+
+  <hr>
+  <form action="/insert_board" method="post">
+    <label for="name_box"> Name </label>
+    <input id="name_box" name="query_name" type="text">
+
+    <button>Add a board</button>
+  </form>
+</div>
