@@ -1,48 +1,61 @@
 <div>
-  <div>
+  <div class="d-flex">
     <h1>
       <%= @the_board.name %>
     </h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="ms-auto btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#addPost">
+      Add a new post
+    </button>
   </div>
 </div>
 
-<h2>
-  Add a new post
-</h2>
+<!-- Modal-->
+<div class="modal fade" id="addPost" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addPostModalLabel">New post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/insert_post" method="post">
+          <div class="mb-3">
+            <label for="title_box" class="form-label">
+              Title
+            </label>
 
-<form action="/insert_post" method="post">
-  <div>
-    <label for="title_box">
-      Title
-    </label>
+            <input type="text" id="title_box" name="query_title" class="form-control">
+          </div>
 
-    <input type="text" id="title_box" name="query_title">
+          <div>
+            <label for="body_box" class="form-label">
+              Body
+            </label>
+
+            <textarea id="body_box" name="query_body" rows="3" class="form-control"></textarea>
+          </div>
+
+          <div>
+            <label for="expires_on_box" class="form-label">
+              Expires on
+            </label>
+
+            <input type="date" id="expires_on_box" name="query_expires_on" class="form-control">
+          </div>
+
+          <input type="hidden" id="board_id_box" name="query_board_id" value="<%= @the_board.id %>">
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary">
+              Add post
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div>
-    <label for="body_box">
-      Body
-    </label>
-
-    <textarea id="body_box" name="query_body" rows="3"></textarea>
-  </div>
-
-  <div>
-    <label for="expires_on_box">
-      Expires on
-    </label>
-
-    <input type="date" id="expires_on_box" name="query_expires_on">
-  </div>
-
-  <input type="hidden" id="board_id_box" name="query_board_id" value="<%= @the_board.id %>">
-
-  <button>
-    Add post
-  </button>
-</form>
-
-<hr>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="active-post-tab" data-bs-toggle="tab" data-bs-target="#active-post-tab-pane" type="button" role="tab" aria-controls="active-post-tab-pane" aria-selected="true">Active posts</button>
@@ -51,7 +64,11 @@
     <button class="nav-link" id="inactive-post-tab" data-bs-toggle="tab" data-bs-target="#inactive-post-tab-pane" type="button" role="tab" aria-controls="inactive-post-tab-pane" aria-selected="false">Expired posts</button>
   </li>
 </ul>
-<h2>Active posts</h2>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="active-post-tab-pane" role="tabpanel" aria-labelledby="active-post-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="inactive-post-tab-pane" role="tabpanel" aria-labelledby="inactive-post-tab" tabindex="0">...</div>
+</div>
 
 <table border="1">
   <tr>
@@ -90,3 +107,9 @@
     </tr>
   <% end %>
 </table>
+
+<hr>
+
+<h2>
+  Add a new post
+</h2>
