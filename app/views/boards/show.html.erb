@@ -58,19 +58,40 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="active-post-tab" data-bs-toggle="tab" data-bs-target="#active-post-tab-pane" type="button" role="tab" aria-controls="active-post-tab-pane" aria-selected="true">Active posts</button>
+    <button class="nav-link active" id="active-post-tab" data-bs-toggle="tab" data-bs-target="#active-post-tab-pane" type="button" role="tab" aria-controls="active-post-tab-pane" aria-selected="true">Active posts (<%= @active_posts.count%>)</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="inactive-post-tab" data-bs-toggle="tab" data-bs-target="#inactive-post-tab-pane" type="button" role="tab" aria-controls="inactive-post-tab-pane" aria-selected="false">Expired posts</button>
+    <button class="nav-link" id="inactive-post-tab" data-bs-toggle="tab" data-bs-target="#inactive-post-tab-pane" type="button" role="tab" aria-controls="inactive-post-tab-pane" aria-selected="false">Expired posts (<%= @expired_posts.count %>)</button>
   </li>
 </ul>
 
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="active-post-tab-pane" role="tabpanel" aria-labelledby="active-post-tab" tabindex="0">...</div>
-  <div class="tab-pane fade" id="inactive-post-tab-pane" role="tabpanel" aria-labelledby="inactive-post-tab" tabindex="0">...</div>
-</div>
-
-<% @active_posts.each do |a_post| %>
+  <div class="tab-pane fade show active" id="active-post-tab-pane" role="tabpanel" aria-labelledby="active-post-tab" tabindex="0">
+    <% @active_posts.each do |a_post| %>
+      <div class="row row-cols-4 row-cols-md-1 g-4">
+        <div class="col">
+          <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+              <div>
+                <h6>
+                  <%= a_post.title %>
+                </h6>
+              </div>
+              <div> Expires on <%= a_post.expires_on.strftime("%b %e, %Y")%></div>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><%= a_post.body%></p>
+            </div>
+            <div class="card-footer">
+              Posted on <%= a_post.created_at.strftime("%b %e, %Y") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="inactive-post-tab-pane" role="tabpanel" aria-labelledby="inactive-post-tab" tabindex="0">
+  <% @expired_posts.each do |a_post| %>
   <div class="row row-cols-4 row-cols-md-1 g-4">
     <div class="col">
       <div class="card text-bg-light mb-3" style="max-width: 18rem;">
@@ -92,29 +113,5 @@
     </div>
   </div>
 <% end %>
-
-<h2>Expired posts</h2>
-
-<table border="1">
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th>Posted on</th>
-    <th>Expired on</th>
-  </tr>
-
-  <% @expired_posts.each do |a_post| %>
-    <tr>
-      <td><%= a_post.title %></td>
-      <td><%= a_post.body %></td>
-      <td><%= a_post.created_at.strftime("%b %e, %Y") %></td>
-      <td><%= a_post.expires_on.strftime("%b %e, %Y") %></td>
-    </tr>
-  <% end %>
-</table>
-
-<hr>
-
-<h2>
-  Add a new post
-</h2>
+  </div>
+</div>
