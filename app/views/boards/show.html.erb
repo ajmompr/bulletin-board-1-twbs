@@ -64,7 +64,7 @@
     <button class="nav-link" id="inactive-post-tab" data-bs-toggle="tab" data-bs-target="#inactive-post-tab-pane" type="button" role="tab" aria-controls="inactive-post-tab-pane" aria-selected="false">Expired posts (<%= @expired_posts.count %>)</button>
   </li>
 </ul>
-
+<!-- ACTIVE TAB & ACTIVE POSTS -->
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="active-post-tab-pane" role="tabpanel" aria-labelledby="active-post-tab" tabindex="0">
     <div class="row row-cols-1 row-cols-md-4 g-4">
@@ -77,7 +77,9 @@
                   <%= a_post.title %>
                 </h6>
               </div>
-              <div> Expires on <%= a_post.expires_on.strftime("%b %e, %Y")%></div>
+              <div> 
+                Expires on <%= a_post.expires_on.strftime("%b %e, %Y")%>
+              </div>
             </div>
             <div class="card-body">
               <p class="card-text"><%= a_post.body%></p>
@@ -90,9 +92,13 @@
       <% end %>
     </div>
   </div>
-  <div class="tab-pane fade" id="inactive-post-tab-pane" role="tabpanel" aria-labelledby="inactive-post-tab" tabindex="0">
-    <% @expired_posts.each do |a_post| %>
-      <div class="row row-cols-4 row-cols-md-1 g-4">
+</div>
+
+<!-- EXPIRED TAB & INACTIVE POSTS -->
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="inactive-post-tab-pane" role="tabpanel" aria-labelledby="inactive-post-tab" tabindex="0">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <% @expired_posts.each do |a_post| %>
         <div class="col">
           <div class="card text-bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">
@@ -101,7 +107,9 @@
                   <%= a_post.title %>
                 </h6>
               </div>
-              <div> Expires on <%= a_post.expires_on.strftime("%b %e, %Y")%></div>
+              <div> 
+                Expires on <%= a_post.expires_on.strftime("%b %e, %Y")%>
+              </div>
             </div>
             <div class="card-body">
               <p class="card-text"><%= a_post.body%></p>
@@ -111,7 +119,7 @@
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
